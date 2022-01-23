@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "fcc17e61-cba4-48aa-9cb4-f79897fd7bbb",
+		"name": "Practica 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": []
+		},
+		{
+			"name": "Login",
+			"item": []
+		},
+		{
+			"name": "Restaurant",
+			"item": [
+				{
+					"name": "Order Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{url}}:{{port_deliveryman}}/restaurant/order?status=progress",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port_deliveryman}}",
+							"path": [
+								"restaurant",
+								"order"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "progress",
+									"description": "progress, completed"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deliveryman",
+			"item": [
+				{
+					"name": "Order Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{url}}:{{port_deliveryman}}/deliveryman/order?status=delivered",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port_deliveryman}}",
+							"path": [
+								"deliveryman",
+								"order"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "delivered",
+									"description": "progress, delivered, "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
