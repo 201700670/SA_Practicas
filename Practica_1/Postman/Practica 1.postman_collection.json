@@ -6,11 +6,11 @@
 	},
 	"item": [
 		{
-			"name": "Client",
+			"name": "Login",
 			"item": []
 		},
 		{
-			"name": "Login",
+			"name": "Client",
 			"item": []
 		},
 		{
@@ -19,15 +19,25 @@
 				{
 					"name": "Order Status",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{protocol}}://{{url}}:{{port_deliveryman}}/restaurant/order?status=progress",
+							"raw": "{{protocol}}://{{url}}:{{port_restaurant}}/restaurant/order?status=progress",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{url}}"
 							],
-							"port": "{{port_deliveryman}}",
+							"port": "{{port_restaurant}}",
 							"path": [
 								"restaurant",
 								"order"
