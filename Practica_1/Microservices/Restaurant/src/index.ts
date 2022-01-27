@@ -10,7 +10,7 @@ const app = express();
 const server = createServer(app);
 
 // Config
-app.set("port", 8083);
+app.set("port", 8082);
 app.set("json spaces", 2);
 
 // Middlewares
