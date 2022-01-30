@@ -18,6 +18,19 @@ interface Order {
 
 var order : Order = {no: 0 , menu: [], status: Status.pending };
 
+
+const sendData = async (res: Response, url: string, data: Object) => {
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+        .catch(error => { console.log(error); res.json(error); })
+        .then(response => { console.log(response); res.json(response); });
+};
+
 export const receiveOrder = async (req: Request, res: Response) => {
     const { no, menu } = req.body.data.pedido;
     order = { no: no, menu: menu, status: Status.preparing };
@@ -52,16 +65,7 @@ export const orderStatus = async (req: Request, res: Response) => {
     };
 
     console.log("***************************Notify Order Status Client********************************");
-
-    fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then(res => res.json())
-        .catch(error => { console.log(error); res.json(error); })
-        .then(response => { console.log(response); res.json(response); });
+    sendData(res, url, data);
 };
 
 export const notifyDeliveryman = async (req: Request, res: Response) => {
@@ -80,16 +84,7 @@ export const notifyDeliveryman = async (req: Request, res: Response) => {
     };
 
     console.log("***************************Notify Deliveryman********************************");
-
-    fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data), // data can be `string` or {object}!
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then(res => res.json())
-    .catch(error => { console.log(error); res.json(error); })
-    .then(response => { console.log(response); res.json(response); });
+    sendData(res, url, data);
 };
 
 export const delivered = async (req: Request, res: Response) => {

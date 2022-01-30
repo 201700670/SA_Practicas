@@ -92,6 +92,6 @@ export const delivered = async (req: Request, res: Response) => {
     };
 
     notifyRestaurant(req, res, data);
-    //notifyClient(req, res, data);
+    notifyClient(req, res, data);
 };
 
