@@ -44,7 +44,8 @@ async function login(req, res){
     try{
         var {username, password}  = req.body;
         if ( username == 'deliveryman' && password == '123') {
-            const token =jwt.sign({sub: config.SECRET_DELIVERYMAN }, username+password)
+            const token =jwt.sign({ foo: 'bar' }, username+password)
+            config.SECRET_DELIVERYMAN='deliveryman123'
             res.send({
               statuscode: 200,
               ok: true,
@@ -52,8 +53,7 @@ async function login(req, res){
               data: { token },
             });
         }else if ( username == 'client' && password == '456') {
-            const token =jwt.sign({sub: config.SECRET_CLIENT }, username+password)
-            
+            const token =jwt.sign({ foo: 'bar' }, username+password)
             res.send({
               statuscode: 200,
               ok: true,
@@ -61,7 +61,7 @@ async function login(req, res){
               data: { token },
             });
         }else if ( username == 'restaurant' && password == '789') {
-            const token =jwt.sign({sub: config.SECRET_RESTAURANT }, username+password)
+            const token =jwt.sign({ foo: 'bar' }, username+password)
             
             res.send({
               statuscode: 200,

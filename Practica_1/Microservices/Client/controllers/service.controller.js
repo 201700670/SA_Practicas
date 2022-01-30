@@ -18,7 +18,8 @@ async function index(req, res){
 async function verifyToken(req, res){
     try{
         const secret = process.env.JWT_SECRET;
-        const token = jwt.sign({ sub: 'test' }, 'abc', { algorithm: 'none' })
+        const token = req.headers.authorization.replace('Bearer ', '');
+
         if (token) {
             verify(token, secret, (err, _) => {
                 if (err) {
@@ -38,12 +39,42 @@ async function verifyToken(req, res){
    
 }
 require('dotenv').config(); //configuracion dotenv
-async function pedido(req, res){
+const fetch = require('node-fetch');
+async function pedido(req, res, next){
     const config = require('../config.js');
+    
     
     try{
         
-        var {delivery, preparation} = req.query
+        
+        //console.log(datos)
+        const token = req.headers.authorization.replace('Bearer ', '');
+        console.log(token)
+        try{
+            if (token) {
+                jwt.verify(token, config.SECRET_DELIVERYMAN, function(err, decoded) {
+                    if(err){
+                        res.send({ statuscode: 401, ok: false, message: 'Token inválido0', data: {} });
+                    }else{
+                        next();
+                    }
+                });
+            }
+        }
+          catch {
+            res.send({ statuscode: 400, ok: false, message: 'Token no proveído.', data: {} });
+        }
+
+        
+
+    
+        /*try {
+            var decoded = jwt.verify(token, config.SECRET_RESTAURANT);
+          } catch(err) {
+            // err
+            console.log("ERROR DE CONTRASE;A")
+          }*/
+
         var {pedido}  = req.body;
         var menu= pedido
         let optionsmenu={
@@ -55,8 +86,8 @@ async function pedido(req, res){
             pedido: {
                 no: Math.round(Math.random() * (900 - 100) + 100),
                 menu: optionsmenu.menu,
-                preparado: preparation,
-                entregado: delivery
+                preparado: "pending",
+                entregado: "pending"
             }
         }
 
