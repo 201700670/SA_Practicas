@@ -18,9 +18,7 @@ interface Order {
 
 var order : Order = {no: 0 , menu: [], status: Status.pending };
 
-const notifyRestaurant = async (req: Request, res: Response, data = {}) => {
-    const url = 'http://localhost:8082/restaurant/delivered'
-
+const sendData = async (res: Response, url: string, data: Object) => {
     fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -32,18 +30,14 @@ const notifyRestaurant = async (req: Request, res: Response, data = {}) => {
         .then(response => { console.log(response); res.json(response); });
 };
 
+const notifyRestaurant = async (req: Request, res: Response, data = {}) => {
+    const url = 'http://localhost:8082/restaurant/delivered'
+    sendData(res, url, data);
+};
+
 const notifyClient = async (req: Request, res: Response, data = {}) => {
     const url = 'http://localhost:8081/client/delivered'
-
-    fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then(res => res.json())
-        .catch(error => { console.log(error); res.json(error); })
-        .then(response => { console.log(response); res.json(response); });
+    sendData(res, url, data);
 };
 
 export const receiveOrder = async (req: Request, res: Response) => {
@@ -81,15 +75,7 @@ export const orderStatus = async (req: Request, res: Response) => {
 
     console.log("***************************Notify Order Status Client********************************");
 
-    fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then(res => res.json())
-        .catch(error => { console.log(error); res.json(error); })
-        .then(response => { console.log(response); res.json(response); });
+    sendData(res, url, data);
 };
 
 export const delivered = async (req: Request, res: Response) => {
@@ -106,5 +92,6 @@ export const delivered = async (req: Request, res: Response) => {
     };
 
     notifyRestaurant(req, res, data);
-    notifyClient(req, res, data);
+    //notifyClient(req, res, data);
 };
+
