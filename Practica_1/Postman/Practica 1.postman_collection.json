@@ -377,7 +377,7 @@
 			"name": "Deliveryman",
 			"item": [
 				{
-					"name": "Order Status",
+					"name": "Receive Order",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -386,7 +386,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{protocol}}://{{url}}:{{port_deliveryman}}/deliveryman/order?status=delivered",
+							"raw": "{{protocol}}://{{url}}:{{port_deliveryman}}/deliveryman/order",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{url}}"
@@ -395,13 +395,30 @@
 							"path": [
 								"deliveryman",
 								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delivered",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{protocol}}://{{url}}:{{port_deliveryman}}/deliveryman/delivered",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
 							],
-							"query": [
-								{
-									"key": "status",
-									"value": "delivered",
-									"description": "progress, delivered, "
-								}
+							"port": "{{port_deliveryman}}",
+							"path": [
+								"deliveryman",
+								"delivered"
 							]
 						}
 					},
