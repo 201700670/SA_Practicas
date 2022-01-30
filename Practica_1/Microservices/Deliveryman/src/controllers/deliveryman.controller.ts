@@ -95,3 +95,20 @@ export const delivered = async (req: Request, res: Response) => {
     notifyClient(req, res, data);
 };
 
+export const sendOrderStatus = async (req: Request, res: Response) => {
+    console.log("***************************Order Status********************************");
+
+    let data = {
+        statuscode: 200,
+        ok: true,
+        message: `Estado de la órden`,
+        data: {
+            'order': order,
+            'current-status': order.status
+        },
+    };
+
+    console.log(data);
+    return setResponse(res, data);
+};
+
