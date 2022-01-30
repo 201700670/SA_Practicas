@@ -55,7 +55,7 @@ export const orderStatus = async (req: Request, res: Response) => {
 
     fetch(url, {
         method: 'POST',
-        body: JSON.stringify(data), // data can be `string` or {object}!
+        body: JSON.stringify(data),
         headers:{
             'Content-Type': 'application/json'
         }
@@ -90,4 +90,22 @@ export const notifyDeliveryman = async (req: Request, res: Response) => {
     }).then(res => res.json())
     .catch(error => { console.log(error); res.json(error); })
     .then(response => { console.log(response); res.json(response); });
+};
+
+export const delivered = async (req: Request, res: Response) => {
+    const { data } = req.body;
+    order = { no: data.order.no, menu: data.order.menu, status: data.order.status };
+
+    let response = {
+        statuscode: 200,
+        ok: true,
+        message: `Orden número: ${ data.order.no } entregada con éxito.`,
+        data: {
+            'order' : order
+        },
+    };
+
+    console.log("***************************Delivered********************************");
+    console.log(response);
+    return setResponse(res, response);
 };
