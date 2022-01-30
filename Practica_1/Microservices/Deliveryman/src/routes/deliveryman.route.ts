@@ -1,10 +1,10 @@
 import { Router } from "express";
 const router = Router();
 import {
-  orderStatus
+  receiveOrder,
 } from "../controllers/deliveryman.controller";
 import { verifyToken } from "./auth.jwt";
 
-router.post("/order", orderStatus);
+router.post('/receive-order', receiveOrder);
 
 export default router;

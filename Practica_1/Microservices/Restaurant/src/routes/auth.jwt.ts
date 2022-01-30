@@ -3,7 +3,7 @@ import { verify } from "jsonwebtoken";
 import { setResponse } from "../controllers/set-response";
 
 export function verifyToken(req: Request, res: Response, next: NextFunction) {
-    const secret = process.env.JWT_SECRET as string;
+    const secret = process.env.SECRET_RESTAURANT as string;
     const token = req.headers.authorization?.replace('Bearer ', '');
 
     if (token) {

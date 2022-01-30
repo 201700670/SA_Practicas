@@ -2,11 +2,13 @@ import { Router } from "express";
 const router = Router();
 import {
   orderStatus,
-  sendData
+  receiveOrder,
+  notifyDeliveryman,
 } from "../controllers/restaurant.controller";
 import { verifyToken } from "./auth.jwt";
 
-router.post("/order", orderStatus);
-router.get("/send", sendData);
+router.post('/receive-order', receiveOrder);
+router.post("/order", verifyToken, orderStatus);
+router.post("/notify-deliveryman", verifyToken, notifyDeliveryman);
 
 export default router;
