@@ -45,6 +45,7 @@ const notifyClient = async (req: Request, res: Response, data = {}) => {
         .catch(error => { console.log(error); res.json(error); })
         .then(response => { console.log(response); res.json(response); });
 };
+
 export const receiveOrder = async (req: Request, res: Response) => {
     const { no, menu } = req.body.data.order;
     order = { no: no, menu: menu, status: Status.inprogress };
