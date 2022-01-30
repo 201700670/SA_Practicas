@@ -40,7 +40,8 @@ async function verifyToken(req, res){
 require('dotenv').config(); //configuracion dotenv
 async function login(req, res){
     const config = require('../config.js');
-    
+    console.log("**************************** L O G I N *********************************\n")
+    const msg="Ha iniciado sesion correctamente"
     try{
         var {username, password}  = req.body;
         if ( username == 'deliveryman' && password == '123') {
@@ -49,26 +50,29 @@ async function login(req, res){
             res.send({
               statuscode: 200,
               ok: true,
-              message: "Ha iniciado sesion correctamente",
+              message: msg,
               data: { token },
             });
+            console.log(msg)
         }else if ( username == 'client' && password == '456') {
             const token =jwt.sign({ foo: 'bar' }, username+password)
             res.send({
               statuscode: 200,
               ok: true,
-              message: "Ha iniciado sesion correctamente",
+              message: msg,
               data: { token },
             });
+            console.log(msg)
         }else if ( username == 'restaurant' && password == '789') {
             const token =jwt.sign({ foo: 'bar' }, username+password)
             
             res.send({
               statuscode: 200,
               ok: true,
-              message: "Ha iniciado sesion correctamente",
+              message: msg,
               data: { token },
             });
+            console.log(msg)
         } else {
             res.send(res, {
                 statuscode: 501,
@@ -86,6 +90,7 @@ async function login(req, res){
             message: "Ha ocurrido un error inesperado.",
             data: {},
           });
+          console.log("Ha ocurrido un error inesperado.")
     }
    
 }

@@ -52,8 +52,23 @@ async function pedido(req, res, next){
         console.log(token)
         try{
             if (token) {
-                jwt.verify(token, config.SECRET_DELIVERYMAN, function(err, decoded) {
+                jwt.verify(token, config.SECRET_RESTAURANT, function(err, decoded) {
+                    
                     if(err){
+                        jwt.verify(token, config.SECRET_DELIVERYMAN, function(err, decoded) {
+                            if(err){
+                                jwt.verify(token, config.SECRET_CLIENT, function(err, decoded) {
+                                    if(err){
+                                        res.send({ statuscode: 401, ok: false, message: 'Token inválido0', data: {} });
+                                    }else{
+                                        next();
+                                    }
+                                })
+                                res.send({ statuscode: 401, ok: false, message: 'Token inválido0', data: {} });
+                            }else{
+                                next();
+                            }
+                        })
                         res.send({ statuscode: 401, ok: false, message: 'Token inválido0', data: {} });
                     }else{
                         next();
@@ -66,15 +81,6 @@ async function pedido(req, res, next){
         }
 
         
-
-    
-        /*try {
-            var decoded = jwt.verify(token, config.SECRET_RESTAURANT);
-          } catch(err) {
-            // err
-            console.log("ERROR DE CONTRASE;A")
-          }*/
-
         var {pedido}  = req.body;
         var menu= pedido
         let optionsmenu={
