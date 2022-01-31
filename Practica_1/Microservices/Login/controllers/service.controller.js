@@ -53,7 +53,7 @@ async function login(req, res){
               message: msg,
               data: { token },
             });
-            console.log(msg)
+            console.log(msg+" "+username)
         }else if ( username == 'client' && password == '456') {
             const token =jwt.sign({ foo: 'bar' }, username+password)
             res.send({
@@ -62,7 +62,7 @@ async function login(req, res){
               message: msg,
               data: { token },
             });
-            console.log(msg)
+            console.log(msg+" "+username)
         }else if ( username == 'restaurant' && password == '789') {
             const token =jwt.sign({ foo: 'bar' }, username+password)
             
@@ -72,7 +72,7 @@ async function login(req, res){
               message: msg,
               data: { token },
             });
-            console.log(msg)
+            console.log(msg+" "+username)
         } else {
             res.send(res, {
                 statuscode: 501,

@@ -36,7 +36,7 @@ const notifyRestaurant = async (req: Request, res: Response, data = {}) => {
 };
 
 const notifyClient = async (req: Request, res: Response, data = {}) => {
-    const url = 'http://localhost:8081/client/delivered'
+    const url = 'http://localhost:8081/client/viewdelivery'
     sendData(res, url, data);
 };
 

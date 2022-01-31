@@ -52,7 +52,7 @@ export const receiveOrder = async (req: Request, res: Response) => {
 };
 
 export const orderStatus = async (req: Request, res: Response) => {
-    const url = 'http://localhost:8081/client/order'
+    const url = 'http://localhost:8081/client/vieworder'
     order = { no: order.no, menu: order.menu, status: order.status };
 
     let data = {

@@ -102,7 +102,7 @@ async function viewPedido(req, res, next){
 
         console.log("\n*********************** VERIFICAR ESTADO DEL PEDIDO AL RESTAURANTE *********************\n")
         console.log(req.body.data)
-        res.send(JSON.stringify(req.body.data));
+        res.send(req.body.data);
 
     }catch(e){
         res.status(500)
@@ -123,7 +123,7 @@ async function viewEntrega(req, res, next){
         
         console.log("\n*********************** VERIFICAR ESTADO DEL PEDIDO AL REPARTIDOR *********************\n")
         console.log(req.body.data)
-        res.send(JSON.stringify(req.body.data));
+        res.send(req.body.data);
 
     }catch(e){
         res.status(500)
