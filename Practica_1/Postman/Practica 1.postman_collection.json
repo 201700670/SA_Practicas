@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f48cccab-2832-4272-80de-beeb964d841f",
+		"_postman_id": "39509a60-3255-4527-b4f9-36ee8fba61e3",
 		"name": "Practica 1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -196,9 +196,23 @@
 					"response": []
 				},
 				{
-					"name": "Pedido Cliente copy",
+					"name": "Ver Orden Restaurante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"if (jsonData.statuscode == 200) {",
+									"  postman.setEnvironmentVariable(\"order\", jsonData.data.pedido.no); ",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -209,8 +223,12 @@
 								"value": ""
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"no\": 417,\n    \"menu\": [ \"hamburguesa\", \"papas\", \"soda\"],\n    \"status\": \"Orden entregada al repartidor\"\n  }\n}\n"
+						},
 						"url": {
-							"raw": "{{protocol}}://{{url}}:{{port_client}}/client/order/{{order}}",
+							"raw": "{{protocol}}://{{url}}:{{port_client}}/client/vieworder",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{url}}"
@@ -218,8 +236,54 @@
 							"port": "{{port_client}}",
 							"path": [
 								"client",
-								"order",
-								"{{order}}"
+								"vieworder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Orden Repartidor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"if (jsonData.statuscode == 200) {",
+									"  postman.setEnvironmentVariable(\"order\", jsonData.data.pedido.no); ",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"statuscode\": 200,\n  \"ok\": true,\n  \"message\": \"Estado de la órden\",\n  \"data\": {\n    \"order\": { \n            \"no\": {{order}}, \n            \"menu\": [ \"hamburguesa\", \"papas\", \"soda\"],\n            \"status\": \"La orden fue entregada\" \n         },\n    \"current-status\": \"La orden fue entregada\"\n  }\n}\n"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{url}}:{{port_client}}/client/viewdelivery",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port_client}}",
+							"path": [
+								"client",
+								"viewdelivery"
 							]
 						}
 					},
@@ -238,7 +302,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token_restaurant}}",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -305,7 +369,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"statuscode\": 200,\n    \"ok\": true,\n    \"message\": \"Orden número: 130 recibida con éxito.\",\n    \"data\": {\n        \"order\": {\n            \"no\": 130,\n            \"menu\": [\n                \"hamburguesa\",\n                \"papas\",\n                \"soda\"\n            ],\n            \"status\": \"PREPARING\"\n        },\n        \"previous-status\": \"PENDING\",\n        \"current-status\": \"PREPARING\"\n    }\n}"
 						}
@@ -419,6 +483,36 @@
 							"path": [
 								"deliveryman",
 								"delivered"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Status Client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{url}}:{{port_restaurant}}/restaurant/notify-deliveryman",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port_restaurant}}",
+							"path": [
+								"restaurant",
+								"notify-deliveryman"
 							]
 						}
 					},
