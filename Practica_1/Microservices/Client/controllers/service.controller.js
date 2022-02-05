@@ -17,6 +17,7 @@ async function index(req, res){
 const config = require('../config.js');
 async function verifyToken(req, res, next){
     try{
+        console.log(req.headers.authorization)
         const token = req.headers.authorization.replace('Bearer ', '');
         console.log("\n******************* AUTORIZACION PARA INGRESAR PORTAL CLIENTE *******************\n")
         try{
@@ -131,22 +132,22 @@ async function viewEntrega(req, res, next){
 }
 
 
-async function VerifiyStatusPedido(req, res, next){
+function VerifiyStatusPedido(req, res, next){
     try {
         verifyToken(req,res,next)
 
         console.log("\n>>>>>>>>>>>>>>>> VERIFICAR ESTADO DEL PEDIDO AL RESTAURANTE <<<<<<<<<<<<<<<<<<<<\n")
         
-        const resultado=await fetch('http://localhost:8082/restaurant/send-order-status', 
+        fetch('http://localhost:8082/restaurant/send-order-status', 
           {
               method: 'POST',
               headers: {'Content-Type': 'application/json'}
           }).then(response => response.json())
           .then(data =>{
-              console.log(data);
-              JSON.stringify(data);
+              console.log(data);              
           });
-
+          
+         res.end()
     }catch(e){
         res.status(500)
         res.send({
@@ -159,13 +160,13 @@ async function VerifiyStatusPedido(req, res, next){
     
 }
 
-async function VerifiyStatusEntrega(req, res, next){
+function VerifiyStatusEntrega(req, res, next){
     try{
         //ACCESO DE EL CLIENTE (LOGIN)
         verifyToken(req,res,next)
         console.log("\n>>>>>>>>>>>>>>>> VERIFICAR ESTADO DEL PEDIDO AL REPARTIDOR <<<<<<<<<<<<<<<<<<<<\n")
         
-        const resultado=await fetch('http://localhost:8082/deliveryman/send-order-status', 
+       fetch('http://localhost:8082/deliveryman/send-order-status', 
           {
               method: 'POST',
               headers: {'Content-Type': 'application/json'}
