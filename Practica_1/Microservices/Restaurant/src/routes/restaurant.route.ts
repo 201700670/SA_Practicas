@@ -10,9 +10,9 @@ import {
 import { verifyToken } from "./auth.jwt";
 
 router.post('/receive-order', receiveOrder);
-router.post("/delivered", delivered);
+router.post("/delivered",verifyToken, delivered);
 router.post("/order",orderStatus);
-router.post("/notify-deliveryman", notifyDeliveryman);
+router.post("/notify-deliveryman", verifyToken, notifyDeliveryman);
 router.post('/send-order-status', sendOrderStatus);
 
 export default router;
