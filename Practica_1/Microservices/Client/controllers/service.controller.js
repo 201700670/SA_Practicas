@@ -17,7 +17,6 @@ async function index(req, res){
 const config = require('../config.js');
 async function verifyToken(req, res, next){
     try{
-        console.log(req.headers.authorization)
         const token = req.headers.authorization.replace('Bearer ', '');
         console.log("\n******************* AUTORIZACION PARA INGRESAR PORTAL CLIENTE *******************\n")
         try{
@@ -28,6 +27,7 @@ async function verifyToken(req, res, next){
                         
                         res.send({ statuscode: 401, ok: false, message: 'Token inválido0', data: {} });
                     }else{
+                        console.log("Acceso autorizado cliente")
                         next();
                     }
                 });
