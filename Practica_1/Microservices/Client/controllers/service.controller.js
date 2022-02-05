@@ -92,14 +92,11 @@ async function pedido(req, res, next){
     }
 }
 
-async function getpedido(req, res){
-    
-}
 
 async function viewPedido(req, res, next){
     try{
         //ACCESO DE EL CLIENTE (LOGIN)
-
+        verifyToken(req,res,next)
         console.log("\n*********************** VERIFICAR ESTADO DEL PEDIDO AL RESTAURANTE *********************\n")
         console.log(req.body.data)
         res.send(req.body.data);
@@ -120,7 +117,7 @@ async function viewPedido(req, res, next){
 async function viewEntrega(req, res, next){
     try{
         //ACCESO DE EL CLIENTE (LOGIN)
-        
+        verifyToken(req,res,next)
         console.log("\n*********************** VERIFICAR ESTADO DEL PEDIDO AL REPARTIDOR *********************\n")
         console.log(req.body.data)
         res.send(req.body.data);
@@ -141,7 +138,7 @@ async function viewEntrega(req, res, next){
 async function VerifiyStatusPedido(req, res, next){
     try{
         //ACCESO DE EL CLIENTE (LOGIN)
-        
+        verifyToken(req,res,next)
         console.log("\n>>>>>>>>>>>>>>>> VERIFICAR ESTADO DEL PEDIDO AL RESTAURANTE <<<<<<<<<<<<<<<<<<<<\n")
         
         const resultado=await fetch('http://localhost:8082/restaurant/send-order-status', 
@@ -168,7 +165,7 @@ async function VerifiyStatusPedido(req, res, next){
 async function VerifiyStatusEntrega(req, res, next){
     try{
         //ACCESO DE EL CLIENTE (LOGIN)
-        
+        verifyToken(req,res,next)
         console.log("\n>>>>>>>>>>>>>>>> VERIFICAR ESTADO DEL PEDIDO AL REPARTIDOR <<<<<<<<<<<<<<<<<<<<\n")
         
         const resultado=await fetch('http://localhost:8082/deliveryman/send-order-status', 
