@@ -166,7 +166,7 @@ function VerifiyStatusEntrega(req, res, next){
         verifyToken(req,res,next)
         console.log("\n>>>>>>>>>>>>>>>> VERIFICAR ESTADO DEL PEDIDO AL REPARTIDOR <<<<<<<<<<<<<<<<<<<<\n")
         
-       fetch('http://localhost:8082/deliveryman/send-order-status', 
+       fetch('http://localhost:8083/deliveryman/send-order-status', 
           {
               method: 'POST',
               headers: {'Content-Type': 'application/json'}
