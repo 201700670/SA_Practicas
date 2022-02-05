@@ -95,8 +95,6 @@ async function pedido(req, res, next){
 
 async function viewPedido(req, res, next){
     try{
-        //ACCESO DE EL CLIENTE (LOGIN)
-        verifyToken(req,res,next)
         console.log("\n*********************** VERIFICAR ESTADO DEL PEDIDO AL RESTAURANTE *********************\n")
         console.log(req.body.data)
         res.send(req.body.data);
@@ -116,8 +114,6 @@ async function viewPedido(req, res, next){
 
 async function viewEntrega(req, res, next){
     try{
-        //ACCESO DE EL CLIENTE (LOGIN)
-        verifyToken(req,res,next)
         console.log("\n*********************** VERIFICAR ESTADO DEL PEDIDO AL REPARTIDOR *********************\n")
         console.log(req.body.data)
         res.send(req.body.data);
@@ -136,9 +132,9 @@ async function viewEntrega(req, res, next){
 
 
 async function VerifiyStatusPedido(req, res, next){
-    try{
-        //ACCESO DE EL CLIENTE (LOGIN)
+    try {
         verifyToken(req,res,next)
+
         console.log("\n>>>>>>>>>>>>>>>> VERIFICAR ESTADO DEL PEDIDO AL RESTAURANTE <<<<<<<<<<<<<<<<<<<<\n")
         
         const resultado=await fetch('http://localhost:8082/restaurant/send-order-status', 
@@ -146,9 +142,10 @@ async function VerifiyStatusPedido(req, res, next){
               method: 'POST',
               headers: {'Content-Type': 'application/json'}
           }).then(response => response.json())
-          .then(data => console.log(data));
-
-        res.end()
+          .then(data =>{
+              console.log(data);
+              JSON.stringify(data);
+          });
 
     }catch(e){
         res.status(500)
@@ -196,4 +193,3 @@ module.exports.viewPedido = viewPedido;
 module.exports.viewEntrega = viewEntrega;
 module.exports.VerifiyStatusPedido=VerifiyStatusPedido
 module.exports.VerifiyStatusEntrega=VerifiyStatusEntrega
-module.exports.getpedido = getpedido;

@@ -8,5 +8,4 @@ router.route('/client/vieworder').post(cliente.viewPedido)
 router.route('/client/viewdelivery').post(cliente.viewEntrega)
 router.route('/client/verify-status-order').post(cliente.VerifiyStatusPedido)
 router.route('/client/verify-status-delivery').post(cliente.VerifiyStatusEntrega)
-router.route('/client/order').get(cliente.getpedido)
 module.exports = router;
