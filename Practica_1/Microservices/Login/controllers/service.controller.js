@@ -77,7 +77,7 @@ async function login(req, res){
             res.send(res, {
                 statuscode: 501,
                 ok: false,
-                message: `Ha ocurrido un error inesperado.`,
+                message: `Credenciales incorrectas Intentelo de nuevo.`,
                 data: {},
             });
         }
@@ -87,10 +87,10 @@ async function login(req, res){
         res.send({
             statuscode: 500,
             ok: false,
-            message: "Ha ocurrido un error inesperado.",
+            message: "Credenciales incorrectas Intentelo de nuevo.",
             data: {},
           });
-          console.log("Ha ocurrido un error inesperado.")
+          console.log("Credenciales incorrectas Intentelo de nuevo.")
     }
    
 }
