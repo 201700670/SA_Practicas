@@ -136,8 +136,67 @@ async function viewEntrega(req, res, next){
     }
     
 }
+
+
+async function VerifiyStatusPedido(req, res, next){
+    try{
+        //ACCESO DE EL CLIENTE (LOGIN)
+        
+        console.log("\n>>>>>>>>>>>>>>>> VERIFICAR ESTADO DEL PEDIDO AL RESTAURANTE <<<<<<<<<<<<<<<<<<<<\n")
+        
+        const resultado=await fetch('http://localhost:8082/restaurant/send-order-status', 
+          {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'}
+          }).then(response => response.json())
+          .then(data => console.log(data));
+
+        res.end()
+
+    }catch(e){
+        res.status(500)
+        res.send({
+            statuscode: 500,
+            ok: false,
+            message: "Ha ocurrido un error inesperado.",
+            data: {},
+          });
+    }
+    
+}
+
+async function VerifiyStatusEntrega(req, res, next){
+    try{
+        //ACCESO DE EL CLIENTE (LOGIN)
+        
+        console.log("\n>>>>>>>>>>>>>>>> VERIFICAR ESTADO DEL PEDIDO AL REPARTIDOR <<<<<<<<<<<<<<<<<<<<\n")
+        
+        const resultado=await fetch('http://localhost:8082/deliveryman/send-order-status', 
+          {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'}
+          }).then(response => response.json())
+          .then(data => console.log(data));
+
+        res.end()
+
+    }catch(e){
+        res.status(500)
+        res.send({
+            statuscode: 500,
+            ok: false,
+            message: "Ha ocurrido un error inesperado.",
+            data: {},
+          });
+    }
+    
+}
+
+
 module.exports.index = index;
 module.exports.pedido = pedido;
 module.exports.viewPedido = viewPedido;
 module.exports.viewEntrega = viewEntrega;
+module.exports.VerifiyStatusPedido=VerifiyStatusPedido
+module.exports.VerifiyStatusEntrega=VerifiyStatusEntrega
 module.exports.getpedido = getpedido;
