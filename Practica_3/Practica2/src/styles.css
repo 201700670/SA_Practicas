@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-image: url("https://elviajerofeliz.com/wp-content/uploads/2015/07/Semuc-Champey.jpg");
+    height: 90%;
+    background-repeat: no-repeat;
+  background-position: center;
+}
+html, body { height: 90%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
