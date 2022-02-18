@@ -1,4 +1,4 @@
-# Practica3 SA npm
+# Practica3 SA 
 
 | Nombre                        | Carne     |
 | ----------------------------- | --------- |
