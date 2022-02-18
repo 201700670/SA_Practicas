@@ -1,4 +1,4 @@
-# Practica3
+# Practica
 
 | Nombre                        | Carne     |
 | ----------------------------- | --------- |
