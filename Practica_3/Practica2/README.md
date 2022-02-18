@@ -1,4 +1,4 @@
-# Practica3
+# Practica3 SA
 
 | Nombre                        | Carne     |
 | ----------------------------- | --------- |
