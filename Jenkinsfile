@@ -26,12 +26,12 @@ pipeline {
     }
     stage('Run interfaz'){
       steps {
-        sh 'pm2 start "npm run start"'
+        sh 'pm2 start "npm run start ng serve --host 0.0.0.0 --port 8082"'
       }
     }
     stage("pm2 status"){
       steps{
-        sh 'pm2 log'
+        sh 'pm2 status'
       }
     }
   }
