@@ -26,7 +26,7 @@ pipeline {
     }
     stage('Run interfaz'){
       steps {
-        sh 'pm2 start "npm run start"'
+        sh 'pm2 restart all'
       }
     }
   }
