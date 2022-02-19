@@ -9,9 +9,9 @@ pipeline {
         sh 'npm install'
       }
     }
-    stage('Configuration') {
+    stage('Test') {
       steps {
-        sh 'npm config ls'
+        sh 'npm run test'
       }
     }
     stage('Build') {
