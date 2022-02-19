@@ -26,7 +26,12 @@ pipeline {
     }
     stage('Run interfaz'){
       steps {
-        sh 'npm run start'
+        sh 'pm2 start "npm run start"'
+      }
+    }
+    stage("pm2 status"){
+      steps{
+        sh 'pm2 status'
       }
     }
   }
