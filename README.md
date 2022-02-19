@@ -1,4 +1,4 @@
-# Practica3 SA 
+# Practica3 SA - Pareja 2 
 
 | Nombre                        | Carne     |
 | ----------------------------- | --------- |
