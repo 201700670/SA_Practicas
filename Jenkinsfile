@@ -31,7 +31,7 @@ pipeline {
     }
     stage("pm2 status"){
       steps{
-        sh 'pm2 status'
+        sh 'pm2 log'
       }
     }
   }
