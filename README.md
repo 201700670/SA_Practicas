@@ -1,4 +1,4 @@
-# Practica3 SA - Pareja 2 
+# Practica3 SA - Pareja 3 
 
 | Nombre                        | Carnet    |
 | ----------------------------- |-----------|
