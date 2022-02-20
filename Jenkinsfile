@@ -7,6 +7,7 @@ pipeline {
     stage('Install') {
       steps {
         sh 'npm install'
+        sh 'exit -1'
       }
     }
     stage('Test') {
