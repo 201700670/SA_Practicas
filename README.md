@@ -1,7 +1,7 @@
-# Practica3 SA - Pareja2 
+# Practica3 SA - Pareja 3 
 
-| Nombre                        | Carne     |
-| ----------------------------- | --------- |
+| Nombre                        | Carnet    |
+| ----------------------------- |-----------|
 | Alison Cristina Leiva Paredes | 201700378 |
 | Cinthya Andrea Palomo Galvez  | 201700670 |
 
