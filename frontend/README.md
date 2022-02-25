@@ -1,9 +1,9 @@
 # Practica3 SA - Pareja 3 
 
-| Nombre                        | Carnet    |
-| ----------------------------- |-----------|
-| Alison Cristina Leiva Paredes | 201700378 |
-| Cinthya Andrea Palomo Galvez  | 201700670 |
+| Nombre                         | Carnet    |
+|--------------------------------|-----------|
+| Alison Cristina  Leiva Paredes | 201700378 |
+| Cinthya Andrea Palomo Galvez   | 201700670 |
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.2.
 
