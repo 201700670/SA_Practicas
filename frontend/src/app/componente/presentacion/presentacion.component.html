@@ -19,3 +19,20 @@
       201700378
     </h4>
 </mat-card>
+<mat-card id="card1">
+    <h1 id="headers">Básicas</h1> 
+    <br>
+    
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Operación</mat-label>
+            <input matInput placeholder="1+2" id="inputb" [(ngModel)]="basica">
+        </mat-form-field>
+        <br>
+        <button mat-flat-button id="calcular" (click)="calculobasicas(basica)" color="primary">Calcular</button>
+    
+    <mat-card id="card1">
+        Resultado: {{resultadob}}
+    </mat-card>
+    <br>
+
+</mat-card>
