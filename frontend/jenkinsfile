@@ -37,7 +37,6 @@ pipeline {
             try {
               sh 'docker stop ${container_name}'
               sh 'docker rm ${container_name}'
-              sh 'docker container kill ${container_name}'
               sh 'docker rmi ${image_name}:${tag_image}'
               sh 'sudo systemctl daemon-reload'
               sh 'sudo systemctl restart docker'
