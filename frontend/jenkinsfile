@@ -16,13 +16,17 @@ pipeline {
     stage('install') {
       steps {
         git branch: 'jenkins', url: 'https://github.com/201700670/SA_Practicas.git'
-        sh 'npm install'
+        dir('frontend'){
+          sh 'npm install'
+        }
       }
     }
 
     stage('test') {
       steps {
+        dir('frontend'){
           sh 'npm run test'
+        }
       }
     }
   }
