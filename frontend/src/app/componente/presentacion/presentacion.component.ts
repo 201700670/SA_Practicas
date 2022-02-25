@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as math from 'mathjs';
+declare var require: any;
+var math = require('mathjs');
 @Component({
   selector: 'app-presentacion',
   templateUrl: './presentacion.component.html',
