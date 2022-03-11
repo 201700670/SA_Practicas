@@ -5,6 +5,11 @@ pipeline {
     nodejs "node"
   }
 
+  enviroment {
+    PUPPET_MASTER_URL  = '34.133.245.13'
+		PUPPET_AGENT_URL_DEV = "34.125.137.216"
+		PUPPET_AGENT_URL_PROD = "34.121.72.93"
+  }
   parameters {
     string(name: 'container_name', defaultValue: 'sa_page', description: 'Nombre del contenedor de docker.')
     string(name: 'image_name', defaultValue: 'img_page', description: 'Nombre de la imagene docker.')
@@ -61,6 +66,22 @@ pipeline {
         sh 'docker run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
       }
     }
+    stage("DeployDesarrollo") {
+			steps {
+				echo "Deploying to development..."
+				sh '''
+            ssh -n -f sapareja2@${PUPPET_AGENT_URL_DEV} 'sudo /opt/puppetlabs/bin/puppet agent --enviroment-testing --test'
+					'''
+			}
+		}
+    stage("DeployProduccion") {
+			steps {
+				echo 'Deploying to production...'
+				sh '''
+            ssh -n -f sapareja2@${PUPPET_AGENT_URL_PROD} 'sudo /opt/puppetlabs/bin/puppet agent --enviroment-production --test'
+          ''' 
+			}
+		}
   }
 
 }

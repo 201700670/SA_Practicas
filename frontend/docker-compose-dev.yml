@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  SitioWeb:
+    container_name: sitioweb
+    image: andreapalomo/pareja2:latest
+    build:
+      dockerfile: Dockerfile
+      context: ./sitio
+    ports:
+      - '8081:80'
