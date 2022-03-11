@@ -1,10 +1,10 @@
 include 'docker'
 
-  docker::image {'desog1/practicasa':
+  docker::image {'andreapalomo/pareja2':
      image_tag => 'latest'
   }
 
   docker::run{'pruebas':
-     image      => 'desog1/practicasa',
+     image      => 'andreapalomo/pareja2',
      ports      => ['8082:3000'],
   }
