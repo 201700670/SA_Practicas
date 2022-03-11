@@ -70,7 +70,7 @@ pipeline {
 			steps {
 				echo "Deploying to development..."
 				sh '''
-				    cp manifest.pp /etc/puppet/puppet.config
+				    cp manifest.pp /etc/puppetlabs/code/environment/development/manifests/
             ssh -n -f sapareja2@${PUPPET_AGENT_URL_DEV} 'sudo /opt/puppetlabs/bin/puppet agent --environment-development --test'
 					'''
 			}
@@ -79,7 +79,7 @@ pipeline {
 			steps {
 				echo 'Deploying to production...'
 				sh '''
-				    cp manifestproduc.pp /etc/puppet/puppet.config
+				    cp manifestproduc.pp /etc/puppetlabs/code/environment/production/manifests/
             ssh -n -f sapareja2@${PUPPET_AGENT_URL_PROD} 'sudo /opt/puppetlabs/bin/puppet agent --environment-production --test'
           '''
 			}
