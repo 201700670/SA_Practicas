@@ -6,12 +6,12 @@ pipeline {
   }
 
   environment {
-        GOOGLE_PROJECT_ID = "ivory-honor-272915" 
-        GOOGLE_PROJECT_NAME = "Proyecto-ideas-extraordinarias"
+        GOOGLE_PROJECT_ID = "lively-welder-341605" 
+        GOOGLE_PROJECT_NAME = "My First Project"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('sc_jenkins_terraform')
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('sc_jenkins_terraform')
-    }
-  
+  }
+
   parameters {
     string(name: 'container_name', defaultValue: 'sa_page', description: 'Nombre del contenedor de docker.')
     string(name: 'image_name', defaultValue: 'img_page', description: 'Nombre de la imagene docker.')
