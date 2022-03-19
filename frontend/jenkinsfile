@@ -27,7 +27,7 @@ pipeline {
   stage('checkout') { 
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
+          echo 'npm run test --code-coverage'
         }
       }
     }
@@ -35,14 +35,14 @@ pipeline {
     stage("git clone code terraform"){
             steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
+          echo 'npm run test --code-coverage'
         }
       } 
   }
   stage('init') {
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
+          echo 'npm run test --code-coverage'
         }
       }
   }
@@ -50,7 +50,7 @@ pipeline {
   stage('plan') {
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
+          echo 'npm run test --code-coverage'
         }
       }
   }
@@ -58,7 +58,7 @@ pipeline {
   stage('Confirmación de accion') {
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
+          echo 'npm run test --code-coverage'
         }
       }
   }
@@ -66,7 +66,7 @@ pipeline {
     stage('apply or destroy') {
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
+          echo 'npm run test --code-coverage'
         }
       }
     } 
