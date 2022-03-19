@@ -24,10 +24,9 @@ pipeline {
 
  
 
-  stage('clean workspaces -----------') { 
+  stage('checkout') { 
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
           sh 'npm run test --code-coverage'
         }
       }
@@ -37,23 +36,20 @@ pipeline {
             steps {
         dir('frontend') {
           sh 'npm run test --code-coverage'
-          sh 'npm run test --code-coverage'
         }
       } 
   }
-  stage('Terraform init----') {
+  stage('init') {
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
           sh 'npm run test --code-coverage'
         }
       }
   }
 
-  stage('Terraform plan----') {
+  stage('plan') {
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
           sh 'npm run test --code-coverage'
         }
       }
@@ -63,15 +59,13 @@ pipeline {
       steps {
         dir('frontend') {
           sh 'npm run test --code-coverage'
-          sh 'npm run test --code-coverage'
         }
       }
   }
         
-    stage('Terraform apply or destroy ----------------') {
+    stage('apply or destroy') {
       steps {
         dir('frontend') {
-          sh 'npm run test --code-coverage'
           sh 'npm run test --code-coverage'
         }
       }
