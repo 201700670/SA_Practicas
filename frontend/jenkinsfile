@@ -6,15 +6,20 @@ pipeline {
   }
 
   environment {
-    PUPPET_MASTER_URL  = '34.133.245.13'
-		PUPPET_AGENT_URL_DEV = "34.125.137.216"
-		PUPPET_AGENT_URL_PROD = "34.121.72.93"
-  }
+        GOOGLE_PROJECT_ID = "ivory-honor-272915" 
+        GOOGLE_PROJECT_NAME = "Proyecto-ideas-extraordinarias"
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('sc_jenkins_terraform')
+        GOOGLE_CLOUD_KEYFILE_JSON = credentials('sc_jenkins_terraform')
+    }
+  
   parameters {
     string(name: 'container_name', defaultValue: 'sa_page', description: 'Nombre del contenedor de docker.')
     string(name: 'image_name', defaultValue: 'img_page', description: 'Nombre de la imagene docker.')
     string(name: 'tag_image', defaultValue: 'lts', description: 'Tag de la imagen de la página.')
     string(name: 'container_port', defaultValue: '80', description: 'Puerto que usa el contenedor')
+    choice(name: 'ENTORNOS', choices: ['dev', 'pre', 'pro'], description: 'Seleccione el entorno a utilizar')
+    choice(name: 'ACCION', choices: ['', 'plan-apply', 'destroy'], description: 'Seleccione el entorno a utilizar')
+    
   }
 
   stages {
@@ -66,24 +71,67 @@ pipeline {
         sh 'docker run -d -p ${container_port}:80 --name ${container_name} ${image_name}:${tag_image}'
       }
     }
-    stage("DeployDesarrollo") {
-			steps {
-				echo "Deploying to development..."
-				sh '''
-				    cp manifest.pp /etc/puppetlabs/code/environment/development/manifests/
-            ssh -n -f sapareja2@${PUPPET_AGENT_URL_DEV} 'sudo /opt/puppetlabs/bin/puppet agent --environment-development --test'
-					'''
-			}
-		}
-    stage("DeployProduccion") {
-			steps {
-				echo 'Deploying to production...'
-				sh '''
-				    cp manifestproduc.pp /etc/puppetlabs/code/environment/production/manifests/
-            ssh -n -f sapareja2@${PUPPET_AGENT_URL_PROD} 'sudo /opt/puppetlabs/bin/puppet agent --environment-production --test'
-          '''
-			}
-		}
+
+    stage('clean workspaces -----------') { 
+            steps {
+              cleanWs()
+              sh 'env'
+            }
+    }
+
+    stage("git clone code terraform"){
+            steps {
+                cleanWs()
+                    checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/feature/practica7']], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [[$class: 'CleanCheckout']], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [
+                        [url: 'git@github.com:201700670/SA_Practicas.git', credentialsId: '']
+                        ]])
+                sh 'pwd' 
+                sh 'ls -l'
+            }
+        }  
+  }
+  stage('Terraform init----') {
+         steps {
+            sh 'terraform --version'
+            sh ' cd bastion && gcloud projects list'
+            sh ' cd bastion && terraform init -var-file="../variables/dev.tfvars" '
+         } 
   }
 
+  stage('Terraform plan----') {
+            steps {
+               sh 'cd bastion && terraform plan  -refresh=true  -var-file="../variables/dev.tfvars" -lock=false'
+            } 
+  }
+
+  stage('Confirmación de accion') {
+            steps {
+                script {
+                    def userInput = input(id: 'confirm', message: params.ACCION + '?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+                }
+            }
+  }
+        
+  stage('Terraform apply or destroy ----------------') {
+            steps {
+               sh 'echo "comienza"'
+            script{  
+                if (params.ACCION == "destroy"){
+                         sh ' echo "llego" + params.ACCION'   
+                         sh 'cd bastion && terraform destroy -var-file="../variables/dev.tfvars" -auto-approve'
+                } else {
+                         sh ' echo  "llego" + params.ACCION'                 
+                         sh 'cd bastion && terraform apply -refresh=true -var-file="../variables/dev.tfvars"  -auto-approve'  
+                }  
+
+            }
+            } 
+        }  
+   } 
+    
 }
