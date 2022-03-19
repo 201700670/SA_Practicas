@@ -62,7 +62,9 @@ pipeline {
       }
     }
 
-    stage('DeployDesarrollo') {
+
+
+  stage('clean workspaces -----------') { 
       steps {
         dir('frontend') {
           sh 'npm run test --code-coverage'
@@ -71,14 +73,49 @@ pipeline {
       }
     }
 
-    stage('DeployProduccion') {
+    stage("git clone code terraform"){
+            steps {
+        dir('frontend') {
+          sh 'npm run test --code-coverage'
+          sh 'npm run test --code-coverage'
+        }
+      } 
+  }
+  stage('Terraform init----') {
       steps {
         dir('frontend') {
           sh 'npm run test --code-coverage'
-          sh 'npm run build'
+          sh 'npm run test --code-coverage'
         }
       }
-    }
+  }
+
+  stage('Terraform plan----') {
+      steps {
+        dir('frontend') {
+          sh 'npm run test --code-coverage'
+          sh 'npm run test --code-coverage'
+        }
+      }
+  }
+
+  stage('Confirmación de accion') {
+      steps {
+        dir('frontend') {
+          sh 'npm run test --code-coverage'
+          sh 'npm run test --code-coverage'
+        }
+      }
+  }
+        
+    stage('Terraform apply or destroy ----------------') {
+      steps {
+        dir('frontend') {
+          sh 'npm run test --code-coverage'
+          sh 'npm run test --code-coverage'
+        }
+      }
+    } 
   }
 
 }
