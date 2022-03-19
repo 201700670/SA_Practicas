@@ -3,7 +3,7 @@ resource "google_compute_address" "static" {
 }
 
 resource "google_compute_instance" "bastion_instance" {
-  name         = "bastion-${var.client}-${var.environment}"
+  name         = "bastion-practica7-pareja2"
   machine_type = "f1-micro"
   zone         =  "europe-west3-a"  
   tags = [
