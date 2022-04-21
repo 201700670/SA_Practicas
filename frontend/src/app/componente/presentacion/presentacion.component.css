@@ -1,0 +1,37 @@
+#card{
+    width: auto;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 1%;
+    color: aliceblue;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.527) 0%,rgba(0, 0, 0, 0.589) 40%,rgba(0, 0, 0, 0.521) 100%);
+}
+
+#card1{
+    width: auto;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 0.1%;
+    color: aliceblue;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.527) 0%,rgba(0, 0, 0, 0.589) 40%,rgba(0, 0, 0, 0.521) 100%);
+}
+  
+#headers{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: bold;
+}
+
+#info{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: normal;
+    color: aliceblue;
+}
