@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from '../service/service.service';
 declare var require: any;
 var math = require('mathjs');
 @Component({
@@ -10,9 +11,14 @@ export class PresentacionComponent implements OnInit {
 
   basica: string = "";
   resultadob:string="";
-  constructor() { }
+  resultadoa:string="";
+  resultadop:string="";
+  constructor(private service: ServiceService) { }
 
   ngOnInit(): void {
+    this.service.get().subscribe((res:any)=>{
+      this.resultadoa= res.data
+    })
   }
 
   calculobasicas(ecuacion:string){
@@ -25,5 +31,9 @@ export class PresentacionComponent implements OnInit {
     this.basica+=ecuacion
   }
 
-
+  peticion(){
+    this.service.post().subscribe((res:any)=>{
+      this.resultadop= res.data
+    })
+  }
 }

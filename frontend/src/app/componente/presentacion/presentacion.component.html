@@ -1,37 +1,44 @@
-
 <mat-card id="card">
     <h1 id="headers" style="font-size: 45px;">
         Software Avanzado B - Practica7
-     </h1>
-     <h2 id="headers" style="font-size: 25px;">
+    </h1>
+    <h2 id="headers" style="font-size: 25px;">
         Pareja No. 2
-     </h2>
+    </h2>
     <h3 id="info">
-       Cinthya Andrea Palomo Galvez
+        Cinthya Andrea Palomo Galvez
+        <h4 id="info">
+            201700670
+        </h4>
     </h3>
-    <h4 id="info">
-        201700670
-    </h4>
+
     <h3 id="info">
-      Alison Cristina Leiva Paredes
+        Alison Cristina Leiva Paredes
+        <h4 id="info">
+            201700378
+        </h4>
     </h3>
-    <h4 id="info">
-      201700378
-    </h4>
+
 </mat-card>
 <mat-card id="card1">
     <h1 id="headers">Básicas</h1>
-    <br>
 
-        <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Operación</mat-label>
-            <input matInput placeholder="1+2" id="inputb" [(ngModel)]="basica">
-        </mat-form-field>
-        <br>
-        <button mat-flat-button id="calcular" (click)="calculobasicas(basica)" color="primary">Calcular</button>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Operación</mat-label>
+        <input matInput placeholder="1+2" id="inputb" [(ngModel)]="basica">
+    </mat-form-field>
+    <br>
+    <button mat-flat-button id="calcular" (click)="calculobasicas(basica)" color="primary">Calcular</button>
+    <button mat-flat-button id="calcular" (click)="peticion()" color="primary">Peticion</button>
 
     <mat-card id="card1">
         Resultado: {{resultadob}}
+    </mat-card>
+    <mat-card id="card1">
+        Resultado de peticion: {{resultadop}}
+    </mat-card>
+    <mat-card id="card1">
+        Resultado de get: {{resultadoa}}
     </mat-card>
     <br>
 
